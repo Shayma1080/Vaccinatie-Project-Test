@@ -15,39 +15,35 @@ public abstract class Animal implements Vaccinateable,Treatable{
     public Animal() {}
 
     public Animal(String name,int age) {
-        getName();
-        getAge();
+        this.name=name;
+        this.age=age;
+        this.animalId= animalId;
     }
 
 
     @Override
     public void vaccinateAnimal(Disease d) {
-//        for(Disease vaccin : isVaccinated.keySet()){
-//            animalId++;
-//            System.out.println("Is gevaccineerd van : " + vaccin);
-//        }
-
-        if(isVaccinated.containsKey(d)){
-            System.out.println(getName() + " van " + getAge() +" is gevaccineerd van " + d);
+        if(isVaccinated.getOrDefault(d,false)){
+            System.out.println(name + " van " + age +" is gevaccineerd tegen " + d);
         }else{
             System.out.println("Is nog niet gevaccineerd!!!");
         }
     }
 
     public boolean isVaccinated(Disease d){
-        if(isVaccinated.containsKey(d)){
-            return true;
-        }else{
-            return false;
-        }
+//        if(isVaccinated.containsKey(d) && isVaccinated.containsValue(true)){
+//            return true;
+//        }else{
+//            return false;
+//        }
+
+        return isVaccinated.getOrDefault(d, false);// haal alle d uit als er niets in staat geef false terug
     }
 
     @Override
     public void treatAnimal() {
-        for(Animal animal : animals){
-            isClean = true;
-            System.out.println("Krijgen geen treatment");
-        }
+        this.isClean = true;
+        System.out.println(name + " is behandelt");
     }
 
     public Map<Disease, Boolean> getIsVaccinated() {
@@ -59,7 +55,7 @@ public abstract class Animal implements Vaccinateable,Treatable{
     }
 
     public Boolean getClean() {
-        return isClean;
+        return true;
     }
 
     public void setClean(Boolean clean) {
@@ -100,13 +96,12 @@ public abstract class Animal implements Vaccinateable,Treatable{
 
     @Override
     public String toString() {
-        return "Animal{" +
-                "isVaccinated=" + isVaccinated +
+        return  "isVaccinated=" + isVaccinated +
                 ", isClean=" + isClean +
-                ", age=" + age +
                 ", name='" + name + '\'' +
+                ", age=" + age +
                 ", animalNumber=" + animalNumber +
-                '}';
+                ", animals=" + animals;
     }
 
     @Override

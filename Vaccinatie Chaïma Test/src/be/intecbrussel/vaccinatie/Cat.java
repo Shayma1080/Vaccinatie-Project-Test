@@ -11,4 +11,15 @@ public class Cat extends Animal{
     public void treatAnimal() {
         super.treatAnimal();
     }
+
+    @Override
+    public Boolean getClean() {
+        return super.getClean();
+    }
+
+    @Override
+    public String toString() {
+        return " name= " + name +
+                " age= " + age;
+    }
 }

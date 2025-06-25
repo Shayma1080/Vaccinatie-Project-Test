@@ -31,30 +31,29 @@ public class AnimalShelter extends Animal{
     }
     public void sortAnimalsByAge(){
         animals.stream()
-                .map((Animal::getAge))
-                .sorted((p1,p2) ->p1.compareTo(p2))
+                .sorted(Comparator.comparingInt(Animal::getAge))
                 .forEach(e-> System.out.println(e));
     }
     public void printAnimalsNotVaccinated(Disease disease){
         animals.stream()
-                .filter(e->e != getIsVaccinated())
+                .filter(e-> !e.isVaccinated(disease))
                 //.map((Animal::getIsVaccinated))
-                .forEach(e-> System.out.println(e));
+                .forEach(System.out::println);
     }
 
-//    public Animal findAnimal(int number){
-//        return animals.stream()
-//                .filter(e->e.equals(number))
-//                .map(e-> e.getAnimalNumber())
-//                .collect(Collectors.toList());
-//
-//    }
-//    public Animal findAnimal(String name){
-//        return animals.stream()
-//                .filter(e->e.equals(name))
-//                .map(e->e.getName())
-//                .collect(Collectors.toList());
-//    }
+    public Animal findAnimal(int number){
+        return animals.stream()
+                .filter(e->e.getAnimalNumber() == number)
+                .findFirst()
+                .orElse(null); // null als lijst leeg is, gebruikt bij zoek of vergelijksoperaties
+
+    }
+    public Animal findAnimal(String name){
+        return animals.stream()
+                .filter(e->e.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
 
     public void treatAnimal(int animalNumber){
         animals.stream()
@@ -68,28 +67,24 @@ public class AnimalShelter extends Animal{
     }
     public void treatAllAnimals(){
         animals.stream()
-                .collect(Collectors.toList());
-                //.forEach(e-> System.out.println(e));
+                .forEach(Animal::treatAnimal);
     }
 
-//    public Animal findOldestAnimal(){
-//        return  animals.stream()
-//                .sorted((p1,p2)->p2 -p1)
-//                .collect(Collectors.toList());
-//    }
-//
-//    public int countAnimals(){
-//        animalId++;
-//        return animals.stream()
-//                .forEach(e->System.out.println(e));
-//    }
+    public Animal findOldestAnimal(){
+        return  animals.stream()
+                .max(Comparator.comparingInt(Animal::getAge))
+                .orElse(null);
+    }
+
+    public int countAnimals(){
+
+        return (int)animals.stream()
+                .count();
+    }
 
     public static void addAnimal(Animal animal){
         animals.add(animal);
         animalId++;
-        animals.stream()
-                .distinct()
-                .forEach(e-> System.out.println(e));
     }
 
 
