@@ -23,7 +23,7 @@ public abstract class Animal implements Vaccinateable,Treatable{
 
     @Override
     public void vaccinateAnimal(Disease d) {
-        if(isVaccinated.getOrDefault(d,false)){
+        if(isVaccinated.getOrDefault(d,false)){ // wordt gebruikt bij Map, waarde opvragen met sleutel (key)
             System.out.println(name + " van " + age +" is gevaccineerd tegen " + d);
         }else{
             System.out.println("Is nog niet gevaccineerd!!!");
