@@ -30,6 +30,13 @@ public class VaccinateApp {
         System.out.println("Oudste dier: " + oudste);
         System.out.println("Aantal dieren in het asiel: " + shelter.countAnimals());
 
+        Cat cat = new Cat("Nina" ,2);
+        cat.vaccinateAnimal(Disease.CHICKENPOCKS);
+        System.out.println(cat.isVaccinated(Disease.CHICKENPOCKS));
+        System.out.println(shelter.countAnimals());
+        System.out.println(shelter.findAnimal(3));
+
+
 
 
 

@@ -2,9 +2,9 @@ package be.intecbrussel.vaccinatie;
 
 import java.security.Key;
 import java.util.*;
-import java.util.Random;
+
 public abstract class Animal implements Vaccinateable,Treatable{
-    Random random = new Random();
+
     protected Map<Disease,Boolean> isVaccinated = new HashMap<>();
     protected Boolean isClean;
     protected String name;
@@ -18,25 +18,21 @@ public abstract class Animal implements Vaccinateable,Treatable{
     public Animal(String name,int age) {
         this.name=name;
         this.age=age;
-        this.animalId= animalId;
+        this.animalId= animalId++; // geef uniek nummer en verhoog teller
     }
 
 
     @Override
     public void vaccinateAnimal(Disease d) {
-        if(isVaccinated.getOrDefault(d,false)){ // wordt gebruikt bij Map, waarde opvragen met sleutel (key)
-            System.out.println(name + " van " + age +" is gevaccineerd tegen " + d);
-        }else{
-            System.out.println("Is nog niet gevaccineerd!!!");
+        if(isVaccinated.getOrDefault(d,false)){ // veilig en duidelijker
+            System.out.println(name + " van " + age +" is al gevaccineerd tegen " + d);
+        }else {
+            isVaccinated.put(d,true);// indien true is, is die al gevaccineerd
+            System.out.println(name + " is nu gevaccineerd!!!");
         }
     }
 
     public boolean isVaccinated(Disease d){
-//        if(isVaccinated.containsKey(d) && isVaccinated.containsValue(true)){
-//            return true;
-//        }else{
-//            return false;
-//        }
 
         return isVaccinated.getOrDefault(d, false);// haal alle d uit als er niets in staat geef false terug
     }
@@ -44,7 +40,7 @@ public abstract class Animal implements Vaccinateable,Treatable{
     @Override
     public void treatAnimal() {
         this.isClean = true;
-        System.out.println(name + " is behandelt");
+        System.out.println(name + " is behandeld");
     }
 
     public Map<Disease, Boolean> getIsVaccinated() {

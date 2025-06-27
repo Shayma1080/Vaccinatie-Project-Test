@@ -3,7 +3,7 @@ package be.intecbrussel.vaccinatie;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class AnimalShelter extends Animal{
+public class AnimalShelter {
     private static List<Animal> animals= new ArrayList<>();
     private static int animalId= 1;
 
@@ -86,13 +86,14 @@ public class AnimalShelter extends Animal{
     }
 
     public static void addAnimal(Animal animal){
-        animalId++;
+        animal.setAnimalNumber(animalId++);  // geeft het dier een uniek nummer
         animals.add(animal);
+        //animalId++;
     }
 
 
     @Override
     public String toString() {
-        return super.toString() + getAge() + getName();
+        return super.toString();
     }
 }
