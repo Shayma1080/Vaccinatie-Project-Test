@@ -10,9 +10,17 @@ public class VaccinateApp {
         AnimalShelter shelter = new AnimalShelter();
 
         shelter.addAnimal(new Cat("Minoes", 4));
+        shelter.addAnimal(new Cat("Nina" ,2));
         shelter.addAnimal(new Dog("Bello", 6));
+        AnimalShelter.addAnimal(new Monkey("Mogli",8));
         shelter.addAnimal(new Monkey("George", 10));
 
+
+        Cat cat = new Cat("Minoes", 4);
+        cat.treatAnimal();
+        cat.isVaccinated(Disease.CHICKENPOCKS);
+        System.out.println(cat.getIsVaccinated());
+        System.out.println(cat.getAnimalNumber());
 
         System.out.println("Behandelt alle dieren: ");
         shelter.treatAllAnimals();
@@ -26,6 +34,10 @@ public class VaccinateApp {
         Animal oudste = shelter.findOldestAnimal();
         System.out.println("Oudste dier: " + oudste);
         System.out.println("Aantal dieren in het asiel: " + shelter.countAnimals());
+
+
+
+
 
 
 

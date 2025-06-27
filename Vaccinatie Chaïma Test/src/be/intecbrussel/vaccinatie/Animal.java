@@ -2,8 +2,9 @@ package be.intecbrussel.vaccinatie;
 
 import java.security.Key;
 import java.util.*;
-
+import java.util.Random;
 public abstract class Animal implements Vaccinateable,Treatable{
+    Random random = new Random();
     protected Map<Disease,Boolean> isVaccinated = new HashMap<>();
     protected Boolean isClean;
     protected String name;
@@ -87,7 +88,7 @@ public abstract class Animal implements Vaccinateable,Treatable{
     }
 
     public static int getAnimalId() {
-        return animalId;
+        return animalId += animalId;
     }
 
     public static void setAnimalId(int animalId) {

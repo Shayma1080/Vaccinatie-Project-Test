@@ -19,14 +19,12 @@ public class AnimalShelter extends Animal{
     }
     public void sortAnimals(){
         animals.stream()
-                .map((Animal::getAnimalNumber))
-                .sorted((p1,p2) ->p1.compareTo(p2))
+                .sorted(Comparator.comparing(Animal::getAnimalNumber))
                 .forEach(e-> System.out.println(e));
     }
     public void sortAnimalsByName(){
         animals.stream()
-                .map((Animal::getName))
-                .sorted((p1,p2) ->p1.compareTo(p2))
+                .sorted(Comparator.comparing(Animal::getName))
                 .forEach(e-> System.out.println(e));
     }
     public void sortAnimalsByAge(){
@@ -38,32 +36,37 @@ public class AnimalShelter extends Animal{
         animals.stream()
                 .filter(e-> !e.isVaccinated(disease))
                 //.map((Animal::getIsVaccinated))
-                .forEach(System.out::println);
+                .forEach(e-> System.out.println(e));
     }
 
     public Animal findAnimal(int number){
         return animals.stream()
                 .filter(e->e.getAnimalNumber() == number)
+                //.map(Animal::getAnimalNumber)
                 .findFirst()
                 .orElse(null); // null als lijst leeg is, gebruikt bij zoek of vergelijksoperaties
 
     }
+
     public Animal findAnimal(String name){
         return animals.stream()
                 .filter(e->e.getName().equals(name))
                 .findFirst()
                 .orElse(null);
+
+
     }
 
     public void treatAnimal(int animalNumber){
+        animalId+= animalNumber;
         animals.stream()
                 .filter(e->e.equals(animalNumber))
-                .forEach(System.out::println);
+                .forEach(e-> System.out.println(e));
     }
     public void treatAnimal(String name){
         animals.stream()
-                .filter(e->e.equals(name))
-                .forEach(System.out::println);
+                .filter(e->e.isVaccinated.containsKey(name))
+                .forEach(e-> System.out.println(e));
     }
     public void treatAllAnimals(){
         animals.stream()
@@ -83,8 +86,8 @@ public class AnimalShelter extends Animal{
     }
 
     public static void addAnimal(Animal animal){
-        animals.add(animal);
         animalId++;
+        animals.add(animal);
     }
 
 
